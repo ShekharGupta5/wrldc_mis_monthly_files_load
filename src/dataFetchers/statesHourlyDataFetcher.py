@@ -21,7 +21,7 @@ def getStatesHourlyData(statesConfigSheet: List[IStateConfig], targetFilePath: s
         dataSheetDf = pd.read_excel(
             targetFilePath, sheet_name=sheetName, skiprows=1)
         # make timestamp
-        dataSheetDf['Hours'] = dataSheetDf['Hours'] - 1
+        dataSheetDf['Hours'] = dataSheetDf['Hours']
         dataSheetDf['Date'] += pd.to_timedelta(dataSheetDf.Hours, unit='h')
         del dataSheetDf['Hours']
         dataSheetDf = pd.melt(dataSheetDf, id_vars=['Date'])
