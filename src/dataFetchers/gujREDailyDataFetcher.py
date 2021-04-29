@@ -29,6 +29,10 @@ def getGujREGenerationData(targetFilePath: str) -> List[List[IMetricsDataRecord]
         dataShtDf['Date'] += pd.to_timedelta(dataShtDf.Hours, unit='h')
         del dataShtDf['Hours']
         dataShtDf.columns = [' '.join(x.split()) for x in dataShtDf.columns]
+        dataShtDf = dataShtDf.rename(columns={
+            dataShtDf.columns[1]:'Solar(MW)',
+            dataShtDf.columns[0]:'Wind(MW)'
+        })
         dataShtDf = pd.melt(dataShtDf, id_vars=['Date'])
         dataShtDf['entity_tag'] = 'gujrat'
         dataShtDf = dataShtDf.rename(columns={
